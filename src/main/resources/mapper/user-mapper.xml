@@ -36,7 +36,8 @@
     </insert>
 
     <update id="updateStatus">
-        update user set status = #{status} where id = #{id}
+        <!--update user set status = #{status} where id = #{id}-->
+        update user set status = #{param1} where id = #{param2}
     </update>
 
     <update id="updateHeader">

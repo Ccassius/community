@@ -19,6 +19,7 @@ public interface UserMapper {
 
     int insertUser(User user);
 
+    // 不使用 @Param 注解，在xml中，可以用param1, param2 进行访问
     int updateStatus(@Param("id") int id, @Param("status") int status);
 
     int updateHeader(@Param("id") int id, @Param("headerUrl") String headerUrl);
