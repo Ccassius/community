@@ -1,6 +1,7 @@
 package com.nowcoder.community.controller;
 
 import com.google.code.kaptcha.Producer;
+import com.nowcoder.community.annotation.LoginRequired;
 import com.nowcoder.community.entity.User;
 import com.nowcoder.community.service.UserService;
 import com.nowcoder.community.util.CommunityConstant;
@@ -61,6 +62,7 @@ public class LoginController implements CommunityConstant {
     }
 
     // 忘记密码
+    @LoginRequired
     @RequestMapping(path = "/forget", method = RequestMethod.GET)
     public String forgetPassword() {
         return "/site/forget";
