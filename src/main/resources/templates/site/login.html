@@ -65,11 +65,10 @@
 			<h3 class="text-center text-info border-bottom pb-3">登&nbsp;&nbsp;录</h3>
 			<form class="mt-5" method="post" th:action="@{/login}">
 				<div class="form-group row">
-					<label for="username"  class="col-sm-2 col-form-label text-right">账号:</label>
+					<label for="username" class="col-sm-2 col-form-label text-right">账号:</label>
 					<div class="col-sm-10">
 						<input type="text" th:class="|form-control ${usernameMsg!=null?'is-invalid':''}|"
-							   th:value="${param.username}"
-							   name="username" id="username" placeholder="请输入您的账号!" required>
+							   th:value="${param.username}" id="username" name="username" placeholder="请输入您的账号!" required>
 						<div class="invalid-feedback" th:text="${usernameMsg}">
 							该账号不存在!
 						</div>
@@ -79,8 +78,7 @@
 					<label for="password" class="col-sm-2 col-form-label text-right">密码:</label>
 					<div class="col-sm-10">
 						<input type="password" th:class="|form-control ${passwordMsg!=null?'is-invalid':''}|"
-							   th:value="${param.password}"
-							   name="password" id="password" placeholder="请输入您的密码!" required>
+							   th:value="${param.password}" id="password" name="password" placeholder="请输入您的密码!" required>
 						<div class="invalid-feedback" th:text="${passwordMsg}">
 							密码长度不能小于8位!
 						</div>
@@ -89,8 +87,7 @@
 				<div class="form-group row mt-4">
 					<label for="verifycode" class="col-sm-2 col-form-label text-right">验证码:</label>
 					<div class="col-sm-6">
-						<input type="text" th:class="|form-control ${codeMsg!=null?'is-invalid':''}|"
-							   name="code" id="verifycode" placeholder="请输入验证码!">
+						<input type="text" th:class="|form-control ${codeMsg!=null?'is-invalid':''}|" id="verifycode" name="code" placeholder="请输入验证码!">
 						<div class="invalid-feedback" th:text="${codeMsg}">
 							验证码不正确!
 						</div>
@@ -103,10 +100,9 @@
 				<div class="form-group row mt-4">
 					<div class="col-sm-2"></div>
 					<div class="col-sm-10">
-						<input type="checkbox" id="remember-me" name="rememberme"
-							   th:checked="${param.rememberme}">
+						<input type="checkbox" id="remember-me" th:checked="${param.rememberme}" name="rememberme">
 						<label class="form-check-label" for="remember-me">记住我</label>
-						<a href="forget.html" class="text-danger float-right">忘记密码?</a>
+						<a th:href="@{/forget}" class="text-danger float-right">忘记密码?</a>
 					</div>
 				</div>
 				<div class="form-group row mt-4">
@@ -187,9 +183,8 @@
 <script th:src="@{/js/global.js}"></script>
 <script>
 	function refresh_kaptcha() {
-		// 直接使用项目名 community，如果项目名改变了，会导致此处也需要修改
-		// var path = "/community/kaptcha";
-		// 改为可配置项, 使用参数p是为了防止浏览器误以为图片没有改变而不刷新
+		// global.js
+		// var CONTEXT_PATH = "/community";
 		var path = CONTEXT_PATH + "/kaptcha?p=" + Math.random();
 		$("#kaptcha").attr("src", path);
 	}

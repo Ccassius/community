@@ -24,6 +24,10 @@ public interface UserMapper {
 
     int updateHeader(@Param("id") int id, @Param("headerUrl") String headerUrl);
 
+    // 重置密码
     int updatePassword(@Param("id") int id, @Param("password") String password);
+
+    // 修改密码
+    int revampPassword(@Param("id") int id, @Param("password") String password, @Param("salt")String salt);
 
 }
