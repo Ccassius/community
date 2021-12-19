@@ -4,6 +4,7 @@ import com.nowcoder.community.entity.Comment;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,4 +19,19 @@ public interface CommentMapper {
 
     int selectCountByEntity(@Param("entityType") int entityType, @Param("entityId") int entityId);
 
+    int insertComment(@Param("userId") int userId, @Param("entityType") int entityType, @Param("entityId") int entityId,
+                      @Param("targetId") int targetId, @Param("content") String content, @Param("status") int status,
+                      @Param("createTime") Date createTime);
+
 }
+
+
+
+
+
+
+
+
+
+
+

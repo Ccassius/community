@@ -21,10 +21,13 @@ public interface DiscussPostMapper {
     int selectDiscussPostRows(@Param("userId") int userId);
 
     // 添加帖子
-    int insertDiscussPost(DiscussPost discussPost);
+    int insertDiscussPost(@Param("discussPost") DiscussPost discussPost);
 
     // 查询帖子的详情
-    DiscussPost selectDiscussPostById(int id);
+    DiscussPost selectDiscussPostById(@Param("id") int id);
+
+    // 更新评论数量
+    int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 
 }
 
