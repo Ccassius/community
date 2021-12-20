@@ -20,7 +20,7 @@ import java.util.logging.SimpleFormatter;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = CommunityApplication.class)
-class CommunityApplicationTests implements ApplicationContextAware {
+public class CommunityApplicationTests implements ApplicationContextAware {
 
     private ApplicationContext applicationContext;
 
