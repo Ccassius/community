@@ -69,7 +69,6 @@ public class LoginController implements CommunityConstant {
     }
 
     // 忘记密码
-    @LoginRequired
     @RequestMapping(path = "/forget", method = RequestMethod.GET)
     public String forgetPassword() {
         return "/site/forget";

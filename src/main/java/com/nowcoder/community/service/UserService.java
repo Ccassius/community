@@ -110,7 +110,7 @@ public class UserService implements CommunityConstant {
         // 给用户发送激活邮件
         Context context = new Context();
         context.setVariable("email", user.getEmail());
-        // 激活路径：http://localhost:8080/community/activation/101/code
+        // 激活路径：http://localhost:8080/community/activation/101/activationCode
         String url = domain + contextPath + "/activation/" + user.getId() + "/" + user.getActivationCode();
         context.setVariable("url", url);
         String content = templateEngine.process("/mail/activation", context);
@@ -241,6 +241,7 @@ public class UserService implements CommunityConstant {
         return map;
     }
 
+    /**
     public int updatePassword(int userId,String password){
         // 旧密码验证成功，设置新密码以及salt
         String salt = CommunityUtil.generateUUID().substring(0, 5);
@@ -249,6 +250,39 @@ public class UserService implements CommunityConstant {
         // 清除缓存
         //clearUserCache(userId);
         return userMapper.revampPassword(userId, password, salt);
+    }
+     */
+
+    // 修改密码
+    public Map<String, Object> updatePassword(int userId, String oldPassword, String newPassword) {
+        Map<String, Object> map = new HashMap<>();
+
+        // 空值处理
+        if (StringUtils.isBlank(oldPassword)) {
+            map.put("oldPasswordMsg", "原密码不能为空!");
+            return map;
+        }
+        if (StringUtils.isBlank(newPassword)) {
+            map.put("newPasswordMsg", "新密码不能为空!");
+            return map;
+        }
+
+        // 验证二次密码是否相同
+
+
+        // 验证原始密码
+        User user = userMapper.selectById(userId);
+        oldPassword = CommunityUtil.md5(oldPassword + user.getSalt());
+        if (!user.getPassword().equals(oldPassword)) {
+            map.put("oldPasswordMsg", "原密码输入有误!");
+            return map;
+        }
+
+        // 更新密码
+        newPassword = CommunityUtil.md5(newPassword + user.getSalt());
+        userMapper.updatePassword(userId, newPassword);
+
+        return map;
     }
 
     // 1. 优先从缓存中取值

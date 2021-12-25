@@ -23,6 +23,12 @@ public interface CommentMapper {
                       @Param("targetId") int targetId, @Param("content") String content, @Param("status") int status,
                       @Param("createTime") Date createTime);
 
+    Comment selectCommentById(@Param("id") int id);
+
+    List<Comment> selectCommentsByUser(@Param("userId") int userId, @Param("offset") int offset, @Param("limit") int limit);
+
+    int selectCountByUser(@Param("userId") int userId);
+
 }
 
 

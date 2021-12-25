@@ -22,6 +22,7 @@ public interface UserMapper {
     // 不使用 @Param 注解，在xml中，可以用param1, param2 进行访问
     int updateStatus(@Param("id") int id, @Param("status") int status);
 
+    // 修改用户头像路径
     int updateHeader(@Param("id") int id, @Param("headerUrl") String headerUrl);
 
     // 重置密码
