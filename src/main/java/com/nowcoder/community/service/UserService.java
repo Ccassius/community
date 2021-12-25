@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
 /**
  * @author xh
@@ -73,14 +74,28 @@ public class UserService implements CommunityConstant {
             map.put("usernameMsg", "账号不能为空");
             return map;
         }
+        if(user.getUsername().length() > 32) {
+            map.put("usernameMsg", "账号不能超过32个字符");
+        }
+
         if(StringUtils.isBlank(user.getPassword())) {
             map.put("passwordMsg", "密码不能为空");
             return map;
         }
+        // 正则表达式，密码格式为8~16，由字母数字组成，可包含符号
+        String pattern = "^(?=.*[0-9])(?=.*[a-zA-Z])[0-9A-Za-z~!@#$%^&*._?]{8,16}$";
+        boolean ok = Pattern.matches(pattern, user.getPassword());
+        if(!ok) {
+            map.put("passwordMsg", "密码格式不正确，需要包含字母和数字，并且在8~16个字符之间");
+            return map;
+        }
+
         if(StringUtils.isBlank(user.getEmail())) {
             map.put("emailMsg", "邮箱不能为空");
             return map;
         }
+
+
 
         // 验证账号是否已存在
         User u = userMapper.selectByName(user.getUsername());
@@ -145,6 +160,13 @@ public class UserService implements CommunityConstant {
         }
         if(StringUtils.isBlank(password)) {
             map.put("passwordMsg", "密码不能为空！");
+            return map;
+        }
+        // 正则表达式，密码格式为8~16，由字母数字组成，可包含符号
+        String pattern = "^(?=.*[0-9])(?=.*[a-zA-Z])[0-9A-Za-z~!@#$%^&*._?]{8,16}$";
+        boolean ok = Pattern.matches(pattern, password);
+        if(!ok) {
+            map.put("passwordMsg", "密码格式不正确，需要包含字母和数字，并且在8~16个字符之间");
             return map;
         }
 
@@ -225,6 +247,13 @@ public class UserService implements CommunityConstant {
             map.put("passwordMsg", "密码不能为空!");
             return map;
         }
+        // 正则表达式，密码格式为8~16，由字母数字组成，可包含符号
+        String pattern = "^(?=.*[0-9])(?=.*[a-zA-Z])[0-9A-Za-z~!@#$%^&*._?]{8,16}$";
+        boolean ok = Pattern.matches(pattern, password);
+        if(!ok) {
+            map.put("passwordMsg", "密码格式不正确，需要包含字母和数字，并且在8~16个字符之间");
+            return map;
+        }
 
         // 验证邮箱
         User user = userMapper.selectByEmail(email);
@@ -262,12 +291,25 @@ public class UserService implements CommunityConstant {
             map.put("oldPasswordMsg", "原密码不能为空!");
             return map;
         }
+        // 正则表达式，密码格式为8~16，由字母数字组成，可包含符号
+        String pattern = "^(?=.*[0-9])(?=.*[a-zA-Z])[0-9A-Za-z~!@#$%^&*._?]{8,16}$";
+        boolean ok = Pattern.matches(pattern, oldPassword);
+        if(!ok) {
+            map.put("oldPasswordMsg", "原密码格式不正确，需要包含字母和数字，并且在8~16个字符之间");
+            return map;
+        }
+
         if (StringUtils.isBlank(newPassword)) {
             map.put("newPasswordMsg", "新密码不能为空!");
             return map;
         }
-
-        // 验证二次密码是否相同
+        // 正则表达式，密码格式为8~16，由字母数字组成，可包含符号
+        pattern = "^(?=.*[0-9])(?=.*[a-zA-Z])[0-9A-Za-z~!@#$%^&*._?]{8,16}$";
+        ok = Pattern.matches(pattern, newPassword);
+        if(!ok) {
+            map.put("newPasswordMsg", "新密码格式不正确，需要包含字母和数字，并且在8~16个字符之间");
+            return map;
+        }
 
 
         // 验证原始密码
