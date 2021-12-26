@@ -62,10 +62,11 @@
         and to_id = #{userId}
         <if test="conversationId!=null">
             and conversation_id = #{conversationId}
-        </if>
+        </if>p;
     </select>
 
-    <insert id="insertMessage" parameterType="Message" keyProperty="id">
+    <!--<insert id="insertMessage" parameterType="Mess age" keyProperty="id">-->
+    <insert id="insertMessage" parameterType="Message">
         insert into message(<include refid="insertFields"></include>)
         values(#{fromId},#{toId},#{conversationId},#{content},#{status},#{createTime})
     </insert>

@@ -46,7 +46,8 @@ public class DiscussPostService {
         post.setTitle(sensitiveFilter.filter(post.getTitle()));
         post.setContent(sensitiveFilter.filter(post.getContent()));
         
-        return discussPostMapper.insertDiscussPost(post);
+        return discussPostMapper.insertDiscussPost(post.getUserId(), post.getTitle(), post.getContent(),
+                post.getType(), post.getStatus(), post.getCreateTime(), post.getCommentCount(), post.getScore());
     }
 
     // 根据id查找帖子

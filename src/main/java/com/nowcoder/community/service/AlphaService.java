@@ -85,7 +85,9 @@ public class AlphaService {
         post.setTitle("Hello");
         post.setContent("新人报道!");
         post.setCreateTime(new Date());
-        discussPostMapper.insertDiscussPost(post);
+        //discussPostMapper.insertDiscussPost(post);
+        discussPostMapper.insertDiscussPost(post.getUserId(), post.getTitle(), post.getContent(),
+                post.getType(), post.getStatus(), post.getCreateTime(), post.getCommentCount(), post.getScore());
 
         // 抛出异常，事务回滚
         Integer.valueOf("abc");
@@ -117,7 +119,9 @@ public class AlphaService {
                 post.setTitle("你好");
                 post.setContent("我是新人!");
                 post.setCreateTime(new Date());
-                discussPostMapper.insertDiscussPost(post);
+                // discussPostMapper.insertDiscussPost(post);
+                discussPostMapper.insertDiscussPost(post.getUserId(), post.getTitle(), post.getContent(),
+                        post.getType(), post.getStatus(), post.getCreateTime(), post.getCommentCount(), post.getScore());
 
                 // 抛出异常，事务回滚
                 Integer.valueOf("abc");

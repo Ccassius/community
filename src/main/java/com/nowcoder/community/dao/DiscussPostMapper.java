@@ -4,6 +4,7 @@ import com.nowcoder.community.entity.DiscussPost;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,11 @@ public interface DiscussPostMapper {
     int selectDiscussPostRows(@Param("userId") int userId);
 
     // 添加帖子
-    int insertDiscussPost(@Param("discussPost") DiscussPost discussPost);
+    //int insertDiscussPost(@Param("discussPost") DiscussPost discussPost);
+    int insertDiscussPost(@Param("userId") int userId, @Param("title") String title, @Param("content") String content,
+                          @Param("type") int type, @Param("status") int status,
+                          @Param("createTime") Date createTime, @Param("commentCount") int commentCount,
+                          @Param("score") double score);
 
     // 查询帖子的详情
     DiscussPost selectDiscussPostById(@Param("id") int id);
